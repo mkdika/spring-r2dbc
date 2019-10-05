@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: development
+server:
+  port: 8084
+
+# Custom config
+# =============
+r2dbc:
+  host: localhost
+  port: 5433
+  name: demo
+  username: postgres
+  password: postgres
+  pool:
+    initial-size: 5
+    max-size: 10
+    # max idle time in minutes
+    max-idle-time: 30
+    validation-query: "SELECT 1"
