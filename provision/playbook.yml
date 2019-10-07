@@ -94,8 +94,20 @@
       become: yes
       tags: postgresql
 
-    - name: Postgresql-10 - add password login for postgres user
+    - name: Postgresql-10 - Add password login for postgres user
       command: sudo -u postgres psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD 'postgres';"
+      tags: postgresql
+
+    - name: Postgresql-10 - Drop existing database
+      command: sudo -u postgres psql -c "DROP DATABASE IF EXISTS demo;"
+      tags: postgresql
+
+    - name: Postgresql-10 - Create database
+      command: sudo -u postgres psql -c "CREATE DATABASE demo;"
+      tags: postgresql
+
+    - name: Postgresql-10 - Create table
+      command: sudo -u postgres psql -c "CREATE TABLE IF NOT EXISTS public.persons (id varchar(36) not null, firstname varchar(50), lastname varchar(50),CONSTRAINT persons_pkey PRIMARY KEY (id));"
       tags: postgresql
 
     - name: Postgresql-10 - Enable and start postgresql
