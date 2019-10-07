@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Scope
 import java.time.Duration
 import javax.annotation.PreDestroy
 
-
 @Configuration
 class DatasourceConfig {
 
@@ -41,7 +40,7 @@ class DatasourceConfig {
     }
 
     @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+//    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     fun connectionPooling(
         connectionFactory: ConnectionFactory,
         @Value("\${r2dbc.pool.initial-size}") initialSize: Int,

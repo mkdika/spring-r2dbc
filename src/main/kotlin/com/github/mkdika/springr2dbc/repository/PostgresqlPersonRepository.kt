@@ -22,7 +22,7 @@ class PostgresqlPersonRepository(
                         .bind("$1", id)
                         .execute()
                 ).doFinally {
-                    close(connection)
+                    connection.close()
                 }
             }
             .map { result ->

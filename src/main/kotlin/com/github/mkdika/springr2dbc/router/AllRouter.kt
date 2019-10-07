@@ -9,11 +9,15 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.body
 import org.springframework.web.reactive.function.server.router
 import reactor.core.publisher.Mono
+import java.util.concurrent.atomic.AtomicInteger
 
 @Configuration
 class AllRouter(
     private val repository: PersonRepository
 ) {
+
+    private val counter = AtomicInteger(0)
+
     @Bean
     fun route() = router {
 
@@ -52,6 +56,8 @@ class AllRouter(
                 val id: String = request.pathVariable("id")
                 repository.findById(id)
                     .flatMap { person ->
+                        val c = counter.addAndGet(1)
+                        println(">>>>> Counter is $c")
                         ServerResponse.ok()
                             .contentType(APPLICATION_JSON)
                             .bodyValue(person)

@@ -14,7 +14,7 @@ r2dbc:
   password: postgres
   pool:
     initial-size: 5
-    max-size: 10
+    max-size: 100
     # max idle time in minutes
     max-idle-time: 30
     validation-query: "SELECT 1"
